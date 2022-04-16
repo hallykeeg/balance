@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    font-family: 'Roboto',  'Roboto Slab', 'Open Sans', 'Lato', 'Playfair Display', 'Montserrat';
+    color: white;
+    background: url('assets/eth.png'), #161C2E;
+    background-size: cover;
+    background-position: center center; 
+    background-repeat: no-repeat; background-attachment: fixed;
+    background-size: cover;  
+    background-color: #464646;
+}

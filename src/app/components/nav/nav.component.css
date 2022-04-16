@@ -1,0 +1,36 @@
+nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #2831b7;
+   
+    border-top: #A4FCF6 solid 1px;
+    border-bottom: #A4FCF6 solid 2px;
+}
+nav>ul{
+    display: flex;
+   
+    align-items: baseline;
+    margin-right: 15px;
+}
+nav>ul>li{
+    margin-right: 25px;
+    padding: 5px;
+    list-style-type: none;
+    font-weight:400;
+    cursor: pointer;
+}
+nav>ul>li>a{
+    padding: 6px;
+}
+nav>ul>li:hover{
+    background-color: #A4FCF6;
+    color: black;
+}
+.right-corner-flex{
+    margin-left: auto;
+}
+.left-marged{
+    margin-left: 25px;
+}
