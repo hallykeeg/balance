@@ -1,0 +1,10 @@
+#container{
+    width: 62vw;
+    height: 70vh;
+    border-radius: 10px;
+    background: #FFFFFF;
+    border: #2831b7 solid 2px;
+    margin: auto;
+    position: relative;
+    top : 13vh;
+}
