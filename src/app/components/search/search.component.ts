@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-
+  placeholder : string = "Paste your Ethereum address"
   constructor() { }
 
   ngOnInit(): void {
