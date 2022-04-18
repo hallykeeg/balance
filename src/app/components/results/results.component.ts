@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResultsComponent implements OnInit {
 
+  result : string = "";
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  setResult(msg:string){
+    this.result = msg;
+  }
 }

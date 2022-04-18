@@ -2,7 +2,7 @@
     <div class="  blue-bg center-row-child"> <h5>Ethereum Balance Finder</h5> </div>
     <div id="search" class="center-row-child"> 
         <input type="search" name="address" id="address" [placeholder]="placeholder"> 
-        <button id="btn_search">Get Balance</button> </div>
+        <button (click)="balance()" id="btn_search">Get Balance</button> </div>
     <app-results></app-results>
     <div> </div>
 </div>
