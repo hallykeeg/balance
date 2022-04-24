@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
+import { from, Observable, of, Subject } from 'rxjs';
 import Web3 from 'web3';
 
 @Injectable({
@@ -11,11 +11,16 @@ export class Web3Service {
   constructor() {
 
    }
-  async getBalance(address:string){
+  async getBalance(address:string)
+  {
 
     //test on address: to do
     const valInitial = await this.web3.eth.getBalance(address);
     let balance = this.web3.utils.fromWei(valInitial, "ether");
-    console.log(balance)
+    return balance;
+  }
+  isAddressValid(address:string):boolean
+  {
+    return this.web3.utils.isAddress(address);
   }
 }
