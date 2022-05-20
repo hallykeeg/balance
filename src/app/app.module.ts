@@ -7,13 +7,19 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
 import { SearchComponent } from './components/search/search.component';
 import { ResultsComponent } from './components/results/results.component';
+import { BalanceComponent } from './components/balance/balance.component';
+import { LiveComponent } from './components/live/live.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     SearchComponent,
-    ResultsComponent
+    ResultsComponent,
+    BalanceComponent,
+    LiveComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

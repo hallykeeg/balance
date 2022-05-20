@@ -23,8 +23,10 @@ nav>ul>li{
 }
 nav>ul>li>a{
     padding: 6px;
+    text-decoration: none;
+    color: white;
 }
-nav>ul>li:hover{
+nav>ul>li>a:hover{
     background-color: #A4FCF6;
     color: black;
 }
@@ -33,4 +35,10 @@ nav>ul>li:hover{
 }
 .left-marged{
     margin-left: 25px;
+}
+.active{
+    font-weight: bold;
+    background-color: #A4FCF6;
+    color: black !important;
+    font-size: 20px;
 }
