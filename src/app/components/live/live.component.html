@@ -11,35 +11,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="border-b">
-                <td class="pad-min">1858963</td>
-                <td class="pad-min">174</td>
-                <td class="pad-min">10 KB</td>
-                <td class="pad-min">11.40 P</td>
+            <tr class="border-b" *ngFor="let blockItem of blocks">
+                <td class="pad-min">{{blockItem.number}}</td>
+                <td class="pad-min">{{blockItem.transactions}}</td>
+                <td class="pad-min">{{blockItem.size}}</td>
+                <td class="pad-min">{{blockItem.difficulty}} </td>
 
-                <td class="pad-min">22 sec</td>
+                <td class="pad-min">{{blockItem.date}}</td>
             </tr>
-             <tr>
-                <td class="pad-min">1858964</td>
-                <td class="pad-min">150</td>
-                <td class="pad-min">12 KB</td>
-                <td class="pad-min">10.54 P</td>
-
-                <td class="pad-min">22 sec</td>
-            </tr>
-            <tr>
-                <td class="pad-min">1858965</td>
-                <td class="pad-min">179</td>
-                <td class="pad-min">8 KB</td>
-                <td class="pad-min">10.54 P</td>
-                <td class="pad-min">22 sec</td>
-            </tr>
-             <tr class="pad-min"> 
-                <td class="pad-min">1858966</td>
-                <td class="pad-min">110</td>
-                <td class="pad-min"> 18.5 P</td>
-                <td class="pad-min">22 sec</td>
-            </tr>
+            
         </tbody>
     </table>
 </div>

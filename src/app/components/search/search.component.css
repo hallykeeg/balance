@@ -1,5 +1,5 @@
 #container{
-    width: 30rem;
+    width: 33rem;
     height: 30rem;
     border-radius: 10px;
     background: #FFFFFF;
@@ -7,7 +7,7 @@
     border: #2831b7 solid 2px;
     margin: auto;
     position: relative;
-    top : 10vh;
+    top : 15vh;
     display: flex;
     flex-direction: column; 
 }
@@ -34,9 +34,9 @@
     
     border-radius: 20px;
     border: #2831b7 solid 2px ;
-    height: 32px;
-    width: 26em;
-    padding: 5px;
+    height: 33px;
+    width: 27em;
+    padding: 6px;
     outline: none;
 }
 
@@ -45,6 +45,7 @@
 }
 #search{
     padding: 5px;
+    margin-top: 1.5em;
 }
 #btn_search{
     height: 32px;
