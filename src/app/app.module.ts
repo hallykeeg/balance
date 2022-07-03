@@ -10,6 +10,7 @@ import { ResultsComponent } from './components/results/results.component';
 import { BalanceComponent } from './components/balance/balance.component';
 import { LiveComponent } from './components/live/live.component';
 import { AboutComponent } from './components/about/about.component';
+import { OnlineStatusModule } from 'ngx-online-status';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AboutComponent } from './components/about/about.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    OnlineStatusModule
   ],
   providers: [],
   bootstrap: [AppComponent]

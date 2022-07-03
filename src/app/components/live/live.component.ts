@@ -2,6 +2,7 @@ import { Component, OnInit,OnDestroy } from '@angular/core';
 import { Web3Service } from 'src/app/services/web3.service';
 import { Block } from 'src/app/Block';
 import { interval, Subscription, take } from 'rxjs';
+import { OnlineStatusService } from 'ngx-online-status';
 
 @Component({
   selector: 'app-live',
@@ -15,7 +16,7 @@ export class LiveComponent implements OnInit {
   blocks:any[]=[];
   
   suscription!:Subscription;
-  constructor(private web3:Web3Service) { }
+  constructor(private web3:Web3Service, private onlineStatusService:OnlineStatusService) { }
 
   ngOnInit(): void {
     

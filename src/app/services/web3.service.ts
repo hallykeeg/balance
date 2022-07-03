@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { concatMap, filter, forkJoin, from, interval,delay, Observable, of,map, range, skipWhile, Subject, Subscription,switchMap, tap } from 'rxjs';
+import { concatMap, filter, forkJoin, from, interval,delay, Observable, of,map, range, skipWhile, Subject, Subscription,switchMap, tap, catchError } from 'rxjs';
 import Web3 from 'web3';
 
 @Injectable({
@@ -57,6 +57,10 @@ export class Web3Service {
           return this.getLastBlockNumber();
         }),
         
+         catchError((error:any)=>{
+          console.log(error)
+          return of(this.latestKnownBlockNumber)
+         }) ,
 
         filter( (blockNumber:number)=>{
           return blockNumber != this.latestKnownBlockNumber;
@@ -81,7 +85,7 @@ export class Web3Service {
        
       );
     
-    }catch(err){console.log(err); return of(0)}
+    }catch(err){console.log('erreur',err); return of(0)}
   }
 
 
