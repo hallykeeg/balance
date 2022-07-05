@@ -69,10 +69,13 @@ export class Web3Service {
 
         concatMap( (val:number)=>{
           if( this.latestKnownBlockNumber !=-1 &&  val- this.latestKnownBlockNumber>1){
-            return range(this.latestKnownBlockNumber+1, val- this.latestKnownBlockNumber).pipe(delay(2500))
+            return range(this.latestKnownBlockNumber+1, val- this.latestKnownBlockNumber).pipe(delay(2000))
           }
           return of(val) 
         }),
+        filter( (blockNumber:number)=>{
+          return blockNumber != this.latestKnownBlockNumber;
+        } ),
         concatMap((val:number)=>{
           return this.getLastBlockMinted(val)
         }),

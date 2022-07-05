@@ -24,7 +24,7 @@ export class LiveComponent implements OnInit {
     
 
     this.suscription = this.web3.launchBlockRecup().subscribe(
-      (block)=>{this.blocks.unshift(block);}
+      (block)=>{ if(!this.blocks.includes(block)) {this.blocks.unshift(block);}}
     );
     
   }
