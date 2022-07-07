@@ -16,7 +16,7 @@ export class LiveComponent implements OnInit,OnDestroy {
   blocks:any[]=[];
   
   suscription!:Subscription;
-  constructor(private web3:Web3Service, private onlineStatusService:OnlineStatusService) { }
+  constructor(private web3:Web3Service) { }
 
   ngOnInit(): void {
     
