@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { concatMap, filter, forkJoin, from, interval,delay, Observable, of,map, range, skipWhile, Subject, Subscription,switchMap, tap, catchError } from 'rxjs';
+import { concatMap, filter, forkJoin, from, interval,delay, Observable, of,map, range, skipWhile, Subject, Subscription,switchMap, tap, catchError, share, shareReplay } from 'rxjs';
 import Web3 from 'web3';
 
 @Injectable({
@@ -12,19 +12,28 @@ export class Web3Service {
   private latestKnownBlockNumber = -1;
 
   
-  private blockTime = 5000;
+  private blockTime = 2000;
   observableBlock!:Observable<any>;
   observableBlockNumber!:Observable<any>;
   suscription!:Subscription;
 
-   
+  subjectNewBlock :Subject<number> = new Subject<number>();
 
   recentBlockNumber:number = 0;
 
   constructor() {
-
+    // if( typeof sessionStorage.getItem('lastBlockBeforeDestroy')=="string" ){
+    //   const val = sessionStorage.getItem('lastBlockBeforeDestroy')!;
+    //   this.latestKnownBlockNumber = parseFloat( val);
+    // }
    }
 
+   getNewBlockSubject() {
+    return this.subjectNewBlock;
+   }
+   notifyNewBlock(blockNumber:number){
+     this.subjectNewBlock.next(blockNumber);
+   }
    
    formatBlockOperator(source:Observable<any>){
     return new Observable(observer=>{
@@ -54,38 +63,39 @@ export class Web3Service {
 
      return interval$.pipe(
         concatMap( (val:number)=>{
-          return this.getLastBlockNumber();
-        }),
-        
-         catchError((error:any)=>{
-          console.log(error)
-          return of(this.latestKnownBlockNumber)
-         }) ,
+          return this.getLastBlockNumber()
+              .pipe(
+                      filter( (blockNumber:number)=>{
+                        return blockNumber != this.latestKnownBlockNumber;
+                      } ),
 
-        filter( (blockNumber:number)=>{
-          return blockNumber != this.latestKnownBlockNumber;
-        } ),
-        
+                      concatMap( (val:number)=>{
+                        if( this.latestKnownBlockNumber !=-1 &&  ( (val - this.latestKnownBlockNumber > 1) ) ){
+                          return range( (this.latestKnownBlockNumber+1), (val - this.latestKnownBlockNumber) ).pipe(delay(1000),
+                          filter( (blockNumber:number)=>{
+                            return blockNumber != this.latestKnownBlockNumber;
+                          } )
+                          )
+                        }else{
+                           return of(val)
+              
+                        }
+                      }),
 
-        concatMap( (val:number)=>{
-          if( this.latestKnownBlockNumber !=-1 &&  val- this.latestKnownBlockNumber>1){
-            return range(this.latestKnownBlockNumber+1, val- this.latestKnownBlockNumber).pipe(delay(2000))
-          }
-          return of(val) 
-        }),
-        filter( (blockNumber:number)=>{
-          return blockNumber != this.latestKnownBlockNumber;
-        } ),
-        concatMap((val:number)=>{
-          return this.getLastBlockMinted(val)
-        }),
-        tap(block=>{ 
-          this.latestKnownBlockNumber=block.number;
-        }),
-        this.formatBlockOperator
+                      concatMap((val:number)=>{
+                        return this.getLastBlockMinted(val)
+                      }),
+                      tap(block=>{ 
+                        this.latestKnownBlockNumber=block.number;
+                       
+                      }),
+                      
 
-       //
-       
+                    );
+        }),
+      
+        this.formatBlockOperator,
+         share()
       );
     
     }catch(err){console.log('erreur',err); return of(0)}

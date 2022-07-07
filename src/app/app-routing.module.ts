@@ -9,10 +9,10 @@ import { ResultsComponent } from './components/results/results.component';
 import { SearchComponent } from './components/search/search.component';
 
 const routes: Routes = [
+  {path: '',   redirectTo: '/balance', pathMatch: 'full' },
   {path:'balance',component:BalanceComponent},
   {path:'live', component:LiveComponent},
   {path:'about', component:AboutComponent},
-  {path: '',   redirectTo: '/balance', pathMatch: 'full' }
 ];
 
 @NgModule({

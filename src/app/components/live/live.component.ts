@@ -3,16 +3,16 @@ import { Web3Service } from 'src/app/services/web3.service';
 import { Block } from 'src/app/Block';
 import { interval, Subscription, take } from 'rxjs';
 import { OnlineStatusService } from 'ngx-online-status';
+import { exit } from 'process';
 
 @Component({
   selector: 'app-live',
   templateUrl: './live.component.html',
   styleUrls: ['./live.component.css']
 })
-export class LiveComponent implements OnInit {
+export class LiveComponent implements OnInit,OnDestroy {
 
-  private blockTime = 1000;
-  private _interval:any;
+   
   blocks:any[]=[];
   
   suscription!:Subscription;
@@ -20,16 +20,27 @@ export class LiveComponent implements OnInit {
 
   ngOnInit(): void {
     
-    
-    
-
-    this.suscription = this.web3.launchBlockRecup().subscribe(
-      (block)=>{ if(!this.blocks.includes(block)) {this.blocks.unshift(block);}}
-    );
+     this.suscription= this.web3.launchBlockRecup().subscribe(
+        (block:any)=>{ 
+          if(!this.blocks.includes(block)) {this.blocks.unshift(block);
+            // sessionStorage.setItem('blocks', JSON.stringify(this.blocks) );
+            // sessionStorage.setItem('lastBlockBeforeDestroy', block.number );
+          }
+      }
+      );
     
   }
-    ngOnDestroy(){
-     this.suscription.unsubscribe()
+
+  ngOnDestroy():void {
+    this.suscription.unsubscribe()
+  }
+
+
+   getBlocks(){
+    const blocks = sessionStorage.getItem('blocks') ;
+    if( typeof blocks =="string"){
+      this.blocks = JSON.parse(blocks);
     }
+   }
 
 }
